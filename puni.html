@@ -58,8 +58,8 @@
             transition: opacity 0.5s;
         }
 
-        /* =====  1: ASK ===== */
-        #-ask { width: 90%; max-width: 400px; position: relative; }
+        /* ===== LAYAR 1: ASK (SUDAH DIPERBAIKI) ===== */
+        #screen-ask { width: 90%; max-width: 400px; position: relative; }
         .gif-top { width: 140px; margin-bottom: 15px; border-radius: 15px; }
         
         h2 { font-family: 'Fredoka', sans-serif; color: var(--pink); font-size: 2rem; margin-bottom: 5px; }
@@ -72,8 +72,8 @@
         .btn-yes:active { transform: scale(0.95); }
         .btn-no { background: #eee; color: #777; position: absolute; z-index: 3; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-        /* =====  2: REACT ===== */
-        #-react { display: none; flex-direction: column; align-items: center; width: 90%; max-width: 400px; animation: pop .5s ease; }
+        /* ===== LAYAR 2: REACT (SUDAH DIPERBAIKI) ===== */
+        #screen-react { display: none; flex-direction: column; align-items: center; width: 90%; max-width: 400px; animation: pop .5s ease; }
         .react-gif { width: 160px; margin-bottom: 10px; }
         .react-title { font-family: 'Fredoka'; font-size: 1.8rem; color: var(--pink); margin-bottom: 25px; }
         
@@ -122,12 +122,11 @@
             overflow: hidden;
         }
 
-        /* ===== KONTEN SURAT (PERBAIKAN POSISI & UKURAN) ===== */
+        /* ===== KONTEN SURAT ===== */
         .letter-content { 
             opacity: 0; transition: opacity 0.5s 0.8s; 
             width: 100%; height: 100%; 
             overflow-y: auto; 
-            /* Flexbox untuk ke tengah */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -136,19 +135,11 @@
         }
 
         .letter-content h3 { 
-            font-family: 'Dancing Script'; 
-            color: var(--pink); 
-            font-size: 2.2rem; /* Dikecilkan sedikit */
-            margin-bottom: 10px; 
-            margin-top: 0;
+            font-family: 'Dancing Script'; color: var(--pink); font-size: 2.2rem; margin-bottom: 10px; margin-top: 0;
         }
 
         .letter-content p { 
-            font-size: 0.95rem; /* Ukuran pas untuk dibaca */
-            color: #555; 
-            line-height: 1.6; 
-            margin-bottom: 20px; 
-            max-width: 95%; /* Biar tidak mentok pinggir */
+            font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 20px; max-width: 95%; 
         }
         
         .btn-video {
@@ -166,7 +157,7 @@
         .envelope-container.open .letter-paper {
             width: 90vw; max-width: 650px; 
             height: 70vh; max-height: 450px;
-            transform: translate(-50%, -100px); /* Ketinggian disesuaikan */
+            transform: translate(-50%, -100px); 
             z-index: 10; 
             border-radius: 20px;
             padding: 30px;
@@ -175,10 +166,9 @@
         
         .envelope-container.open .letter-content { opacity: 1; }
 
-        /* ===== VIDEO SCREEN ===== */
+        /* ===== VIDEO SCREEN (SUDAH DISESUAIKAN UNTUK YOUTUBE SHORTS) ===== */
         #screen-video { display: none; position: fixed; inset: 0; background: black; justify-content: center; align-items: center; flex-direction: column; z-index: 50;}
-        video { width: 95%; max-width: 700px; border-radius: 15px; }
-
+        
         @keyframes pop { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
         @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} 100%{transform:scale(1)} }
         @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px) rotate(-3deg)} 50%{transform:translateX(8px) rotate(3deg)} 75%{transform:translateX(-8px) rotate(-3deg)} }
@@ -199,9 +189,7 @@
     <div id="screen-ask" class="card">
         <img class="gif-top" src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif">
         <h2>hewooo pani! 💖</h2>
-        <p>Kamu sayang gak sama baginda randy?
-
-        </p>
+        <p>Kamu sayang gak sama baginda randy?</p>
 
         <div class="btn-area">
             <button class="btn btn-yes" onclick="iya()">Sayang Dong</button>
@@ -211,9 +199,7 @@
 
     <div id="screen-react" class="card">
         <img class="react-gif" src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif">
-        <div class="react-title">Pilihan yang baguss
-            
-            alabiu! 🥰</div>
+        <div class="react-title">Pilihan yang baguss alabiu! 🥰</div>
         <button class="open-btn" onclick="keAmplop()">💌 Buka Hadiah</button>
     </div>
 
@@ -226,7 +212,7 @@
                     <h3>Happy Birthday sayangg!</h3>
                     <p>
                         <b>Dearest Fanny,</b><br><br>
-                        Selamat ulang tahun ya sayang!.🎉<br>
+                        Selamat ulang tahun ya sayang! 🎉<br>
                         Sekarang kita seumuran!!! Semoga di usia yang baru ini kamu selalu sehat, bahagia, dan dilancarkan semua urusannya.<br><br>
                         Makasih sudah jadi orang yang paling spesial dan sabar buat aku. Semoga web kecil ini bisa bikin hari spesialmu makin berkesan. ❤️<br><br>
                         <i>I Love You!</i>
@@ -244,11 +230,11 @@
     </div>
 
     <div id="screen-video">
-        <iframe id="vid" width="95%" style="max-width: 600px; height: 50vh; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" 
+        <iframe id="vid" style="width: 90%; max-width: 380px; height: 75vh; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" 
             src="https://www.youtube.com/embed/lH8AwiKMKVo" 
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
-        <button class="btn" style="margin-top: 20px; background: white; color: black;" onclick="tutupVideo()">Kembali</button>
+        <button class="btn" style="margin-top: 20px; background: white; color: black; padding: 10px 30px; border-radius: 50px;" onclick="tutupVideo()">Kembali</button>
     </div>
 
     <script>
@@ -313,19 +299,18 @@
             }
         }
 
+        // JAVASCRIPT VIDEO YOUTUBE DIPERBAIKI (Tidak Error Lagi)
         function playVideo() {
             document.getElementById("screen-envelope").style.display = "none";
             document.getElementById("screen-video").style.display = "flex";
-            const vid = document.getElementById("vid");
             music.pause();
-            vid.play();
+            // Video YouTube vertikal tinggal ditekan play oleh Fanny
         }
 
-function tutupVideo() {
+        function tutupVideo() {
             const vid = document.getElementById("vid");
-            // Trik untuk mematikan video YouTube saat ditutup
             const iframeSrc = vid.src;
-            vid.src = iframeSrc; 
+            vid.src = iframeSrc; // Reset YouTube player biar mati suaranya pas ditutup
             
             document.getElementById("screen-video").style.display = "none";
             document.getElementById("screen-envelope").style.display = "flex";
@@ -333,6 +318,4 @@ function tutupVideo() {
         }
     </script>
 </body>
-
 </html>
-
