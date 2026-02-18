@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HBD Fanny ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;800&family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --soft-pink: #ff758f;
+            --bg: #fff0f4;
+            --glass: rgba(255, 255, 255, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(#ffcdd2 2px, transparent 2px);
+            background-size: 30px 30px;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===== DEKORASI STIKER ===== */
+        .sticker { position: absolute; width: 90px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); z-index: 1; animation: floatSticker 4s infinite ease-in-out; }
+        .st-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .st-2 { bottom: 15%; right: 5%; width: 110px; animation-delay: 1s; }
+        .st-3 { top: 15%; right: 8%; width: 80px; animation-delay: 2s; }
+        .st-4 { bottom: 10%; left: 8%; animation-delay: 1.5s; }
+
+        @keyframes floatSticker {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* ===== BACKGROUND HEARTS ===== */
+        .heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatHeart 6s linear infinite; opacity: 0.5; z-index: 0; }
+        @keyframes floatHeart { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.6; } 100% { transform: translateY(-110vh); opacity: 0; } }
+
+        /* ===== KARTU UTAMA ===== */
+        .card {
+            background: var(--glass);
+            border-radius: 30px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            border: 3px solid white;
+            z-index: 5;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s;
+        }
+
+        /* ===== SCREEN 1: ASK ===== */
+        #screen-ask { width: 90%; max-width: 400px; position: relative; }
+        .gif-top { width: 140px; margin-bottom: 15px; border-radius: 15px; }
+        
+        h2 { font-family: 'Fredoka', sans-serif; color: var(--pink); font-size: 2rem; margin-bottom: 5px; }
+        p { color: #555; font-size: 1.1rem; font-weight: 700; }
+
+        .btn-area { position: relative; height: 60px; margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
+        .btn { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+        
+        .btn-yes { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); color: white; box-shadow: 0 5px 15px rgba(255,77,109,0.4); z-index: 2; }
+        .btn-yes:active { transform: scale(0.95); }
+        .btn-no { background: #eee; color: #777; position: absolute; z-index: 3; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+
+        /* ===== SCREEN 2: REACT ===== */
+        #screen-react { display: none; flex-direction: column; align-items: center; width: 90%; max-width: 400px; animation: pop .5s ease; }
+        .react-gif { width: 160px; margin-bottom: 10px; }
+        .react-title { font-family: 'Fredoka'; font-size: 1.8rem; color: var(--pink); margin-bottom: 25px; }
+        
+        .open-btn {
+            background: white; padding: 15px 35px; border-radius: 50px; border: 2px solid var(--soft-pink);
+            font-size: 1.1rem; font-weight: 800; color: var(--pink); cursor: pointer;
+            animation: pulse 1.5s infinite; box-shadow: 0 5px 15px rgba(255,77,109,0.2);
+        }
+
+        /* ===== SCREEN 3: ENVELOPE ===== */
+        #screen-envelope {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(255, 240, 244, 0.95);
+            backdrop-filter: blur(5px);
+            justify-content: center; align-items: center; flex-direction: column;
+            z-index: 20;
+        }
+
+        .envelope-container { position: relative; width: 300px; height: 200px; cursor: pointer; perspective: 1000px; margin-top: 50px;}
+        .envelope-container.shake { animation: shake 0.4s; }
+        
+        .env-back { position: absolute; inset: 0; background: #ff4d6d; border-radius: 10px; z-index: 1; box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+        .env-front { position: absolute; bottom: 0; width: 100%; height: 100%; background: #ff758f; border-radius: 0 0 10px 10px; z-index: 4; clip-path: polygon(0 100%, 50% 35%, 100% 100%, 100% 100%, 0 100%);}
+        .env-front-2 { position: absolute; bottom: 0; width: 100%; height: 100%; background: #ff607e; border-radius: 0 0 10px 10px; z-index: 3; clip-path: polygon(0 0, 50% 50%, 0 100%);}
+        .env-front-3 { position: absolute; bottom: 0; width: 100%; height: 100%; background: #ff8fa3; border-radius: 0 0 10px 10px; z-index: 3; clip-path: polygon(100% 0, 50% 50%, 100% 100%);}
+
+        .env-lid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ff3355;
+            clip-path: polygon(0 0, 50% 55%, 100% 0);
+            transform-origin: top; transition: transform 0.6s ease-in-out;
+            z-index: 5; border-radius: 10px 10px 0 0;
+        }
+
+        /* ===== KERTAS SURAT ===== */
+        .letter-paper {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            width: 270px; height: 170px;
+            background: #fffdf5;
+            border-radius: 10px;
+            z-index: 2; 
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* ===== KONTEN SURAT (PERBAIKAN POSISI & UKURAN) ===== */
+        .letter-content { 
+            opacity: 0; transition: opacity 0.5s 0.8s; 
+            width: 100%; height: 100%; 
+            overflow-y: auto; 
+            /* Flexbox untuk ke tengah */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+        }
+
+        .letter-content h3 { 
+            font-family: 'Dancing Script'; 
+            color: var(--pink); 
+            font-size: 2.2rem; /* Dikecilkan sedikit */
+            margin-bottom: 10px; 
+            margin-top: 0;
+        }
+
+        .letter-content p { 
+            font-size: 0.95rem; /* Ukuran pas untuk dibaca */
+            color: #555; 
+            line-height: 1.6; 
+            margin-bottom: 20px; 
+            max-width: 95%; /* Biar tidak mentok pinggir */
+        }
+        
+        .btn-video {
+            background: var(--pink); color: white;
+            border: none; padding: 10px 30px; border-radius: 30px; font-weight: 800;
+            font-size: 0.95rem; cursor: pointer; animation: pulse 1.5s infinite;
+        }
+
+        .tap-hint { margin-top: 30px; font-family: 'Fredoka'; font-size: 1.2rem; color: var(--pink); animation: pulse 1s infinite; }
+
+        /* ===== ANIMASI BUKA AMPLOP ===== */
+        .envelope-container.open { cursor: default; transform: translateY(100px); transition: 0.8s; }
+        .envelope-container.open .env-lid { transform: rotateX(180deg); z-index: 1; }
+        
+        .envelope-container.open .letter-paper {
+            width: 90vw; max-width: 650px; 
+            height: 70vh; max-height: 450px;
+            transform: translate(-50%, -100px); /* Ketinggian disesuaikan */
+            z-index: 10; 
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .envelope-container.open .letter-content { opacity: 1; }
+
+        /* ===== VIDEO SCREEN ===== */
+        #screen-video { display: none; position: fixed; inset: 0; background: black; justify-content: center; align-items: center; flex-direction: column; z-index: 50;}
+        video { width: 95%; max-width: 700px; border-radius: 15px; }
+
+        @keyframes pop { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+        @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} 100%{transform:scale(1)} }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px) rotate(-3deg)} 50%{transform:translateX(8px) rotate(3deg)} 75%{transform:translateX(-8px) rotate(-3deg)} }
+
+    </style>
+</head>
+
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="musik.mp3">
+    </audio>
+
+    <img src="https://media.giphy.com/media/l4pTdcifPZLpDjL1e/giphy.gif" class="sticker st-1">
+    <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" class="sticker st-2">
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="sticker st-3">
+    
+    <div id="screen-ask" class="card">
+        <img class="gif-top" src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        <h2>hewooo pani! 💖</h2>
+        <p>Kamu sayang gak sama baginda randy?
+
+        </p>
+
+        <div class="btn-area">
+            <button class="btn btn-yes" onclick="iya()">Sayang Dong</button>
+            <button class="btn btn-no" id="btn-no" onmouseover="kabur()" onclick="kabur()">Engga</button>
+        </div>
+    </div>
+
+    <div id="screen-react" class="card">
+        <img class="react-gif" src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif">
+        <div class="react-title">Pilihan yang baguss
+            
+            alabiu! 🥰</div>
+        <button class="open-btn" onclick="keAmplop()">💌 Buka Hadiah</button>
+    </div>
+
+    <div id="screen-envelope">
+        <div class="envelope-container" id="env-wrapper" onclick="tapEnvelope()">
+            <div class="env-back"></div>
+            
+            <div class="letter-paper">
+                <div class="letter-content">
+                    <h3>Happy Birthday sayangg!</h3>
+                    <p>
+                        <b>Dearest Fanny,</b><br><br>
+                        Selamat ulang tahun ya sayang!.
+                        yaa walaupun besok sih bertambahnya  🎉<br>
+                        Semoga di usia yang baru ini kamu selalu sehat, bahagia, dan dilancarkan semua urusannya.<br><br>
+                        Makasih sudah jadi orang yang paling spesial dan sabar buat aku. Semoga web kecil ini bisa bikin hari spesialmu makin berkesan. ❤️<br><br>
+                        <i>I Love You!</i>
+                    </p>
+                    <button class="btn-video" onclick="playVideo()">🎬 Tonton Memori Kita</button>
+                </div>
+            </div>
+
+            <div class="env-front"></div>
+            <div class="env-front-2"></div>
+            <div class="env-front-3"></div>
+            <div class="env-lid"></div>
+        </div>
+        <div class="tap-hint" id="tap-hint">Ketuk amplop 3x 💌</div>
+    </div>
+
+    <div id="screen-video">
+        <video id="vid" controls playsinline>
+            <source src="video.mp4">
+        </video>
+        <button class="btn" style="margin-top: 20px; background: white; color: black;" onclick="tutupVideo()">Kembali</button>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById("btn-no");
+        const music = document.getElementById("bg-music");
+        let tapCount = 0;
+
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "💖";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = 4 + Math.random() * 3 + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 7000);
+        }, 500);
+
+        function kabur() {
+            const x = (Math.random() - 0.5) * 150; 
+            const y = (Math.random() - 0.5) * 150;
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function iya() {
+            music.play();
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            document.getElementById("screen-ask").style.display = "none";
+            document.querySelectorAll('.sticker').forEach(el => el.style.display = 'none');
+            document.getElementById("screen-react").style.display = "flex";
+        }
+
+        function keAmplop() {
+            document.getElementById("screen-react").style.display = "none";
+            document.getElementById("screen-envelope").style.display = "flex";
+        }
+
+        function tapEnvelope() {
+            const env = document.getElementById('env-wrapper');
+            const hint = document.getElementById('tap-hint');
+
+            if (env.classList.contains('open')) return;
+
+            tapCount++;
+            confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+
+            env.classList.remove('shake');
+            void env.offsetWidth; 
+            env.classList.add('shake');
+
+            if (tapCount === 1) hint.innerText = "2 kali lagi... 👀";
+            if (tapCount === 2) hint.innerText = "1 kali lagi... 🫣";
+            
+            if (tapCount >= 3) {
+                hint.innerText = "Yeay! Terbuka 💖";
+                setTimeout(() => hint.style.opacity = 0, 1000); 
+                
+                env.classList.add('open');
+                
+                setTimeout(() => {
+                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 } });
+                }, 500);
+            }
+        }
+
+        function playVideo() {
+            document.getElementById("screen-envelope").style.display = "none";
+            document.getElementById("screen-video").style.display = "flex";
+            const vid = document.getElementById("vid");
+            music.pause();
+            vid.play();
+        }
+
+        function tutupVideo() {
+            const vid = document.getElementById("vid");
+            vid.pause();
+            document.getElementById("screen-video").style.display = "none";
+            document.getElementById("screen-envelope").style.display = "flex";
+            music.play();
+        }
+    </script>
+</body>
+</html>
