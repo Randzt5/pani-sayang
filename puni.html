@@ -58,8 +58,8 @@
             transition: opacity 0.5s;
         }
 
-        /* ===== SCREEN 1: ASK ===== */
-        #screen-ask { width: 90%; max-width: 400px; position: relative; }
+        /* =====  1: ASK ===== */
+        #-ask { width: 90%; max-width: 400px; position: relative; }
         .gif-top { width: 140px; margin-bottom: 15px; border-radius: 15px; }
         
         h2 { font-family: 'Fredoka', sans-serif; color: var(--pink); font-size: 2rem; margin-bottom: 5px; }
@@ -72,8 +72,8 @@
         .btn-yes:active { transform: scale(0.95); }
         .btn-no { background: #eee; color: #777; position: absolute; z-index: 3; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-        /* ===== SCREEN 2: REACT ===== */
-        #screen-react { display: none; flex-direction: column; align-items: center; width: 90%; max-width: 400px; animation: pop .5s ease; }
+        /* =====  2: REACT ===== */
+        #-react { display: none; flex-direction: column; align-items: center; width: 90%; max-width: 400px; animation: pop .5s ease; }
         .react-gif { width: 160px; margin-bottom: 10px; }
         .react-title { font-family: 'Fredoka'; font-size: 1.8rem; color: var(--pink); margin-bottom: 25px; }
         
@@ -245,9 +245,10 @@
     </div>
 
     <div id="screen-video">
-        <video id="vid" controls playsinline>
-            <source src="video.mp4">
-        </video>
+        <iframe id="vid" width="95%" style="max-width: 600px; height: 50vh; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" 
+            src="https://www.youtube.com/embed/lH8AwiKMKVo" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
         <button class="btn" style="margin-top: 20px; background: white; color: black;" onclick="tutupVideo()">Kembali</button>
     </div>
 
@@ -321,13 +322,17 @@
             vid.play();
         }
 
-        function tutupVideo() {
+function tutupVideo() {
             const vid = document.getElementById("vid");
-            vid.pause();
+            // Trik untuk mematikan video YouTube saat ditutup
+            const iframeSrc = vid.src;
+            vid.src = iframeSrc; 
+            
             document.getElementById("screen-video").style.display = "none";
             document.getElementById("screen-envelope").style.display = "flex";
             music.play();
         }
     </script>
 </body>
+
 </html>
